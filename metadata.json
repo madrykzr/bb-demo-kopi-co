@@ -1,0 +1,6 @@
+{
+  "name": "Kopi & Co Demo",
+  "description": "A slow editorial coffee zine and interactive site for Kopi & Co, a fictional Malaysian kissaten-style café in Bangsar, featuring artisan menus, custom visual effects, and storytelling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
