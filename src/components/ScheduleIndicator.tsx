@@ -80,7 +80,7 @@ export default function ScheduleIndicator() {
   };
 
   return (
-    <div className="border border-coffee/15 bg-warm-cream/40 p-5 md:p-6 rounded-sm text-left">
+    <div className="border border-coffee/15 bg-[#FAF6F0]/80 p-8 rounded-2xl text-left h-full flex flex-col justify-between relative overflow-hidden backdrop-blur-md">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
         <div>
           <span className="font-mono text-[9px] uppercase tracking-widest text-sepia block">LIVE STATUS · KUALA LUMPUR (GMT+8)</span>

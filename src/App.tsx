@@ -33,6 +33,7 @@ import { MENU_ITEMS } from './data/menu';
 import { MenuItem, Reservation } from './types';
 import SteamCanvas from './components/SteamCanvas';
 import CursorTrail from './components/CursorTrail';
+import ScheduleIndicator from './components/ScheduleIndicator';
 
 // Hero drink data with rich assets, customized colors and parameters
 const HERO_DRINKS = [
@@ -45,7 +46,7 @@ const HERO_DRINKS = [
     sizes: ["Single", "Double"],
     tag: "92.5°C EXTRACTION",
     origin: "Kochere, Ethiopia",
-    image: "https://images.unsplash.com/photo-151097252790b-af4f902e1de7?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600&auto=format&fit=crop",
     gradient: "from-[#C77B4A]/40 to-[#1E1511]",
     glowColor: "rgba(199, 123, 74, 0.45)"
   },
@@ -84,7 +85,7 @@ const HERO_DRINKS = [
     sizes: ["Standard Size"],
     tag: "SIGNATURE FUSION",
     origin: "Kyoto, Japan / Uji",
-    image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?q=80&w=600&auto=format&fit=crop",
     gradient: "from-[#A6B29C]/40 to-[#1E1511]",
     glowColor: "rgba(166, 178, 156, 0.4)"
   }
@@ -753,13 +754,22 @@ export default function App() {
               <AnimatePresence mode="popLayout">
                 {MENU_ITEMS.filter(item => menuFilter === 'all' || item.category === menuFilter).map((item, idx) => {
                   
-                  // Moody background Unsplash links matching the exact categories
-                  let bgImg = "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=400"; // espresso
-                  if (item.name.toLowerCase().includes('matcha')) bgImg = "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?q=80&w=400";
-                  else if (item.name.toLowerCase().includes('black')) bgImg = "https://images.unsplash.com/photo-151097252790b-af4f902e1de7?q=80&w=400";
-                  else if (item.name.toLowerCase().includes('kaya') || item.category === 'pastries') bgImg = "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400";
-                  else if (item.category === 'sandwiches') bgImg = "https://images.unsplash.com/photo-1539252554453-80ab65ce3586?q=80&w=400";
-                  else if (item.name.toLowerCase().includes('white') || item.name.toLowerCase().includes('kopi c')) bgImg = "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=400";
+                  // Precise high-fidelity Unsplash coffee and pastry mappings for each unique menu item
+                  const itemImages: Record<string, string> = {
+                    k01: 'https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=400&auto=format&fit=crop', // Kopi O - Traditional Black Cup
+                    k02: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=400&auto=format&fit=crop', // Kopi C - Warm Cup with Milk extraction
+                    k03: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=400&auto=format&fit=crop', // Kopi Peng - Cold Sweet Iced
+                    k04: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400&auto=format&fit=crop', // V60 Pour Over Drip
+                    k05: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400&auto=format&fit=crop', // Aeropress Immersion Coffee
+                    k06: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=400&auto=format&fit=crop', // Flat White Cup Art
+                    p01: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop', // Kaya Toast Crusty Bread
+                    p02: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=400&auto=format&fit=crop', // Sweet Pandan Canelé Style
+                    p03: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=400&auto=format&fit=crop', // Golden Croissants
+                    s01: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=400&auto=format&fit=crop', // Sambal Melted Sourdough Cheese Sando
+                    s02: 'https://images.unsplash.com/photo-1550507992-eb63ffee0847?q=80&w=400&auto=format&fit=crop', // Crispy Serai Chicken style
+                    s03: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?q=80&w=400&auto=format&fit=crop', // Miso Jam Egg Boule Slices
+                  };
+                  const bgImg = itemImages[item.id] || "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=400";
 
                   return (
                     <motion.div
@@ -1059,16 +1069,16 @@ export default function App() {
               </p>
             </div>
 
-            {/* Bento grids containing Deals and Newsletters */}
+            {/* Bento grids containing Deals on Row 1, Live Schedule and Newsletter on Row 2 */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch pt-2">
               
-              {/* Card 1: Deal Discount ticket-strip mock */}
+              {/* Card 1: Deal Discount ticket-strip mock (lg:col-span-7) */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className="lg:col-span-5 bg-coffee text-text-cream rounded-2xl p-8 flex flex-col justify-between shadow-lg relative overflow-hidden"
+                className="lg:col-span-7 bg-coffee text-text-cream rounded-2xl p-8 flex flex-col justify-between shadow-lg relative overflow-hidden"
               >
                 {/* Stained wood background image overlay */}
                 <div className="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-15 pointer-events-none"
@@ -1116,13 +1126,13 @@ export default function App() {
                 </div>
               </motion.div>
 
-              {/* Card 2: Food pairing close-up photo */}
+              {/* Card 2: Food pairing close-up photo (lg:col-span-5) */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.15 }}
                 viewport={{ once: true }}
-                className="lg:col-span-4 bg-white rounded-2xl p-6 flex flex-col justify-between border border-coffee/5 shadow-sm overflow-hidden group"
+                className="lg:col-span-5 bg-white rounded-2xl p-6 flex flex-col justify-between border border-coffee/5 shadow-sm overflow-hidden group"
               >
                 <div className="relative w-full h-[220px] rounded-xl overflow-hidden border border-coffee/5">
                   <img 
@@ -1143,16 +1153,32 @@ export default function App() {
                 </div>
               </motion.div>
 
-              {/* Card 3: Modern Newsletter signup card */}
+              {/* Card 3: Live Seat & Brew Schedule (lg:col-span-5) */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="lg:col-span-5 flex flex-col justify-stretch"
+              >
+                <ScheduleIndicator />
+              </motion.div>
+
+              {/* Card 4: Modern Newsletter signup card (lg:col-span-7) */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
                 viewport={{ once: true }}
-                className="lg:col-span-3 bg-[#EBF1EC] rounded-2xl p-8 flex flex-col justify-between border border-sage/60 shadow-sm relative overflow-hidden text-left"
+                className="lg:col-span-7 bg-[#EBF1EC] rounded-2xl p-8 flex flex-col justify-between border border-sage/60 shadow-sm relative overflow-hidden text-left"
               >
-                {/* Visual leaf sketch background hint */}
-                <div className="space-y-4">
+                {/* Visual organic coffee/leaf sketch background - replaces blank block */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-[0.08] pointer-events-none"
+                  style={{ backgroundImage: `url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=600')` }} 
+                />
+
+                <div className="space-y-4 relative z-10">
                   <span className="font-mono text-[8px] uppercase tracking-[0.25em] text-[#C77B4A] font-bold">
                     SUBSCRIBE / LOG BOOK
                   </span>
