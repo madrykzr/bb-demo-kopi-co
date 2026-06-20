@@ -1,23 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-serif-fraunces: "Fraunces", Georgia, serif;
-  --font-serif-source: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --font-serif-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-sans-jakarta: "Plus Jakarta Sans", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
-  --color-cream: #F4F3F0;
-  --color-coffee: #12141A;
-  --color-sepia: #CE7F51;
-  --color-warm-cream: #FFFFFF;
+  --color-cream: #F5EFE6;
+  --color-coffee: #2B1F19;
+  --color-sepia: #C77B4A;
+  --color-warm-cream: #FAF6F0;
+  
+  /* Modern Two-Tone Palette Variables */
+  --color-bg-dark: #2B1F19;
+  --color-bg-deep: #1E1511;
+  --color-bg-brown: #3A2A22;
+  --color-text-cream: #F5EFE6;
+  --color-text-muted: #D1C5B5;
+  --color-terracotta: #C77B4A;
+  --color-accent-terracotta: #D78A58;
+  --color-sage-light: #EBF1EC;
+  --color-sage: #D2DFD3;
+  --color-cream-card: #FAF6F0;
 }
 
 @layer base {
   body {
-    background-color: var(--color-cream);
-    color: var(--color-coffee);
-    font-family: var(--font-serif-source);
-    line-height: 1.8;
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-cream);
+    font-family: var(--font-sans-jakarta);
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
@@ -25,19 +38,19 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif-fraunces);
     font-weight: 500;
-    line-height: 1.25;
+    line-height: 1.2;
   }
 }
 
 /* Custom styles for physical ticket stub / receipt tear aesthetic */
 .ticket-edge-top {
-  background-image: radial-gradient(circle at 10px 0, transparent 8px, #FFFFFF 8px);
+  background-image: radial-gradient(circle at 10px 0, transparent 8px, #FAF6F0 8px);
   background-size: 20px 20px;
   background-position: 0 0;
 }
 
 .ticket-edge-bottom {
-  background-image: radial-gradient(circle at 10px 20px, transparent 8px, #FFFFFF 8px);
+  background-image: radial-gradient(circle at 10px 20px, transparent 8px, #FAF6F0 8px);
   background-size: 20px 20px;
   background-position: 0 0;
 }
