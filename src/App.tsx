@@ -41,8 +41,8 @@ const HERO_DRINKS = [
     id: "h-01",
     name: "Golden Crema Espresso",
     description: "Double ristretto shot of our proprietary roasted Ethiopian heirloom beans, boasting rich nectar, orange blossom, and clear dark cocoa sugar notes.",
-    price: "$4.50",
-    numericPrice: 4.50,
+    price: "RM 12.00",
+    numericPrice: 12.00,
     sizes: ["Single", "Double"],
     tag: "92.5°C EXTRACTION",
     origin: "Kochere, Ethiopia",
@@ -54,8 +54,8 @@ const HERO_DRINKS = [
     id: "h-02",
     name: "Gibraltar Salted Caramel",
     description: "Cold-shaken double espresso layered with creamy oat milk and a dense scratch-made butterscotch caramel reduction poured over raw block ice.",
-    price: "$5.75",
-    numericPrice: 5.75,
+    price: "RM 16.00",
+    numericPrice: 16.00,
     sizes: ["Regular", "Grande"],
     tag: "ORGANIC MILKS",
     origin: "Caldas, Colombia",
@@ -67,8 +67,8 @@ const HERO_DRINKS = [
     id: "h-03",
     name: "18H Kyoto Glass Drip",
     description: "Slow-dripped cold water extraction through physical vertical glass towers over eighteen hours, yielding zero bitterness and notes of organic wild peach tea.",
-    price: "$6.20",
-    numericPrice: 6.20,
+    price: "RM 18.00",
+    numericPrice: 18.00,
     sizes: ["300ml Bottle", "500ml Sharing"],
     tag: "SLOW COLD DRIP",
     origin: "Tarrazú, Costa Rica",
@@ -80,8 +80,8 @@ const HERO_DRINKS = [
     id: "h-04",
     name: "Ceremonial Matcha Ristretto",
     description: "Thick hand-whisked stoneground Uji matcha floated elegantly over velvety microfoam oat milk and centered by a balanced, sweet ristretto core.",
-    price: "$6.00",
-    numericPrice: 6.00,
+    price: "RM 17.00",
+    numericPrice: 17.00,
     sizes: ["Standard Size"],
     tag: "SIGNATURE FUSION",
     origin: "Kyoto, Japan / Uji",
@@ -837,7 +837,7 @@ export default function App() {
                           onClick={() => addToCart({
                             id: item.id,
                             name: item.name,
-                            price: parseFloat(item.price.replace('RM', '').trim()) * 0.25, // convert roughly to USD pricing for demo consistency
+                            price: parseFloat(item.price.replace('RM', '').trim()), // direct RM pricing
                             size: "Standard",
                             image: bgImg
                           })}
@@ -1113,7 +1113,7 @@ export default function App() {
                       addToCart({
                         id: "promo-set-01",
                         name: "Afternoon Slow Filter Set",
-                        price: 4.20, // USD consistency
+                        price: 16.50, // RM pricing
                         size: "Promo Combo",
                         image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400"
                       });
@@ -1677,7 +1677,7 @@ export default function App() {
                         <div className="flex-1 min-w-0 text-left space-y-1">
                           <h4 className="font-serif-fraunces text-xs font-bold text-coffee truncate uppercase">{item.name}</h4>
                           <span className="font-mono text-[8px] uppercase tracking-wider block text-coffee/40">Size: {item.size}</span>
-                          <span className="font-mono text-xs text-terracotta font-semibold">${item.price.toFixed(2)} each</span>
+                          <span className="font-mono text-xs text-terracotta font-semibold">RM {item.price.toFixed(2)} each</span>
                         </div>
 
                         {/* Adjust qty pill */}
@@ -1717,7 +1717,7 @@ export default function App() {
                     <div className="h-[1px] bg-coffee/10 my-1" />
                     <div className="flex justify-between items-center">
                       <span className="font-serif-fraunces text-sm font-bold uppercase">Estimated Subtotal</span>
-                      <span className="font-serif-fraunces text-xl font-bold text-terracotta">${cartSubtotal.toFixed(2)}</span>
+                      <span className="font-serif-fraunces text-xl font-bold text-terracotta">RM {cartSubtotal.toFixed(2)}</span>
                     </div>
                   </div>
 
@@ -1725,7 +1725,7 @@ export default function App() {
                   <div className="pt-2">
                     <button
                       onClick={() => {
-                        alert(`Proceeding to checkout with estimated value of $${cartSubtotal.toFixed(2)}. Traditional single-origin extraction started!`);
+                        alert(`Proceeding to checkout with estimated value of RM ${cartSubtotal.toFixed(2)}. Traditional single-origin extraction started!`);
                         setCartItems([]);
                         setIsCartOpen(false);
                       }}
